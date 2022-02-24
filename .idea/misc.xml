@@ -1,5 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="..\:/Users/mali/AndroidStudioProjects/Countries/app/src/main/res/layout/activity_main.xml" value="0.22" />
+        <entry key="..\:/Users/mali/AndroidStudioProjects/Countries/app/src/main/res/layout/fragment_country_list.xml" value="0.1" />
+        <entry key="..\:/Users/mali/AndroidStudioProjects/Countries/app/src/main/res/layout/fragment_home_container.xml" value="0.3365036231884058" />
+        <entry key="..\:/Users/mali/AndroidStudioProjects/Countries/app/src/main/res/layout/fragment_saved_countries.xml" value="0.18802083333333333" />
+        <entry key="..\:/Users/mali/AndroidStudioProjects/Countries/app/src/main/res/layout/item_country.xml" value="0.22" />
+        <entry key="..\:/Users/mali/AndroidStudioProjects/Countries/app/src/main/res/layout/item_network_error.xml" value="0.16394927536231885" />
+        <entry key="..\:/Users/mali/AndroidStudioProjects/Countries/app/src/main/res/layout/item_test.xml" value="0.3484375" />
+        <entry key="..\:/Users/mali/AndroidStudioProjects/Countries/app/src/main/res/menu/bottam_navigation_menu.xml" value="0.18840579710144928" />
+      </map>
+    </option>
+  </component>
   <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="Android Studio default JDK" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />
   </component>
