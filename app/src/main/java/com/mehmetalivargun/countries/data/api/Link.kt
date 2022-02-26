@@ -1,4 +1,4 @@
-package com.mehmetalivargun.countries.data
+package com.mehmetalivargun.countries.data.api
 
 
 import com.google.gson.annotations.SerializedName

@@ -43,6 +43,20 @@
 
         </LinearLayout>
 
+        <ToggleButton
+            android:id="@+id/button_favorite"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:background="@drawable/button_favorite"
+            android:checked="false"
+            android:text=""
+            android:textOff=""
+            android:textOn=""
+            android:layout_marginEnd="24dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
         <View
             android:id="@+id/view"
             android:layout_width="0dp"
