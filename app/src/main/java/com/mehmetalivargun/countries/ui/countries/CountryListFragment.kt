@@ -1,32 +1,32 @@
 package com.mehmetalivargun.countries.ui.countries
 
 import android.os.Bundle
+import android.util.Log
+import androidx.fragment.app.activityViewModels
 
-import androidx.fragment.app.viewModels
-import androidx.paging.LoadStateAdapter
-import androidx.recyclerview.widget.DiffUtil
+import androidx.navigation.fragment.findNavController
 import com.mehmetalivargun.countries.base.BaseFragment
-import com.mehmetalivargun.countries.data.Country
+import com.mehmetalivargun.countries.data.db.CountryEntity
 import com.mehmetalivargun.countries.databinding.FragmentCountryListBinding
-import com.mehmetalivargun.countries.ui.adapters.CountryAdapter
-import com.mehmetalivargun.countries.ui.adapters.CountryVAdapter
+import com.mehmetalivargun.countries.ui.MainViewModel
+import com.mehmetalivargun.countries.ui.adapters.CountryPagingAdapter
 import com.mehmetalivargun.countries.ui.adapters.PagingLoadStateAdapter
-import com.mehmetalivargun.countries.ui.countries.DiffUtil.searchResultDiffUtil
+import com.mehmetalivargun.countries.ui.container.HomeContainerFragmentDirections
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class CountryListFragment : BaseFragment<FragmentCountryListBinding>(FragmentCountryListBinding::inflate) {
-    private var searchAdapter: CountryVAdapter = CountryVAdapter()
+    private var searchAdapter: CountryPagingAdapter = CountryPagingAdapter()
 
-    private val viewModel:CountryListViewModel by viewModels ()
+    private val viewModel:MainViewModel by activityViewModels()
+
 
     override fun FragmentCountryListBinding.initialize(savedInstanceState: Bundle?) {
         binding.lifecycleOwner=viewLifecycleOwner
-        binding.viewModel=this@CountryListFragment.viewModel
-        viewModel?.getCountryListPaged()?.observe(viewLifecycleOwner) {
-            searchAdapter.submitData(lifecycle, it)
-           // binding.recyclerView.adapter = searchAdapter
+        viewModel.getCountryListPaged().observe(viewLifecycleOwner) {
 
+            searchAdapter.submitData(lifecycle, it)
+            setItemListeners()
             with(binding){
                 recyclerView.adapter=searchAdapter
                 recyclerView.apply {
@@ -37,7 +37,6 @@ class CountryListFragment : BaseFragment<FragmentCountryListBinding>(FragmentCou
                     }
                 }
             }
-
             binding.recyclerView.adapter = searchAdapter.withLoadStateFooter(
                 footer = PagingLoadStateAdapter(searchAdapter)
             )
@@ -46,16 +45,26 @@ class CountryListFragment : BaseFragment<FragmentCountryListBinding>(FragmentCou
     }
 
 
+    private fun setItemListeners(){
+        searchAdapter.onFavClickListener={ country->
+            if (country.isSaved){
+                this@CountryListFragment.viewModel.removeCountry(CountryEntity(country.code,country.name,country.wikiDataId))
+                country.isSaved=false
 
-
-}
-
-object DiffUtil {
-    val searchResultDiffUtil: DiffUtil.ItemCallback<Country> =object : DiffUtil.ItemCallback<Country>() {
-        override fun areItemsTheSame(oldItem: Country, newItem: Country) =
-            oldItem.code == newItem.code
-
-        override fun areContentsTheSame(oldItem: Country, newItem: Country) =
-            oldItem == newItem
+            }else{
+                this@CountryListFragment.viewModel.insertCountry(CountryEntity(country.code,country.name,country.wikiDataId))
+                country.isSaved=true
+            }
+        }
+        searchAdapter.onItemClickListener={
+            viewModel.isSaved(it.code)
+            val direction = HomeContainerFragmentDirections.actionHomeContainerFragmentToDetailFragment(it.code)
+            findNavController().navigate(direction)
+        }
     }
+
+
+
+
 }
+

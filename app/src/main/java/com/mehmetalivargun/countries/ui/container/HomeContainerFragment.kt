@@ -10,7 +10,8 @@ import com.mehmetalivargun.countries.ui.saved.SavedCountriesFragment
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class HomeContainerFragment : BaseFragment<FragmentHomeContainerBinding>(FragmentHomeContainerBinding::inflate) {
+class HomeContainerFragment :
+    BaseFragment<FragmentHomeContainerBinding>(FragmentHomeContainerBinding::inflate) {
 
     private val countryListFragment: CountryListFragment by lazy { CountryListFragment() }
     private val savedCountriesFragment: SavedCountriesFragment by lazy { SavedCountriesFragment() }
@@ -29,9 +30,9 @@ class HomeContainerFragment : BaseFragment<FragmentHomeContainerBinding>(Fragmen
             activeFragment = countryListFragment
             // Add fragments to the FragmentContainer
             childFragmentManager.beginTransaction()
-                .add(R.id.homeContainerView, savedCountriesFragment, "ActorsListFragment")
+                .add(R.id.homeContainerView, savedCountriesFragment, "Saved")
                 .hide(savedCountriesFragment)
-                .add(R.id.homeContainerView, countryListFragment, "MovieListFragment")
+                .add(R.id.homeContainerView, countryListFragment, "CountryList")
                 .commit()
         }
     }

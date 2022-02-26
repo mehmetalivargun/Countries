@@ -66,11 +66,6 @@ object NetworkModule {
             .create(CountryService::class.java)
     }
 
-    @Singleton
-    @Provides
-    fun provideRepository(): CountryRepository {
-        return CountryRepository(provideService())
-    }
 
 
 }

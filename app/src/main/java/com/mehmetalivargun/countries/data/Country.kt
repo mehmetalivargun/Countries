@@ -1,15 +1,11 @@
 package com.mehmetalivargun.countries.data
 
-
-import com.google.gson.annotations.SerializedName
+import androidx.room.ColumnInfo
+import androidx.room.PrimaryKey
 
 data class Country(
-    @SerializedName("code")
     val code: String,
-    @SerializedName("currencyCodes")
-    val currencyCodes: List<String>,
-    @SerializedName("name")
     val name: String,
-    @SerializedName("wikiDataId")
-    val wikiDataId: String
+    val wikiDataId: String,
+    var isSaved: Boolean=false
 )

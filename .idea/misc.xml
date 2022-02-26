@@ -3,9 +3,16 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="..\:/Users/mali/AndroidStudioProjects/Countries/app/src/main/res/layout/activity_main.xml" value="0.22" />
+        <entry key="..\:/Users/mali/AndroidStudioProjects/Countries/app/src/main/res/drawable/button_favorite.xml" value="0.2695" />
+        <entry key="..\:/Users/mali/AndroidStudioProjects/Countries/app/src/main/res/drawable/ic_favorite.xml" value="0.2695" />
+        <entry key="..\:/Users/mali/AndroidStudioProjects/Countries/app/src/main/res/drawable/ic_favorite_border.xml" value="0.2695" />
+        <entry key="..\:/Users/mali/AndroidStudioProjects/Countries/app/src/main/res/layout/activity_main.xml" value="0.10126582278481013" />
+        <entry key="..\:/Users/mali/AndroidStudioProjects/Countries/app/src/main/res/layout/activity_main2.xml" value="0.17831813576494426" />
+        <entry key="..\:/Users/mali/AndroidStudioProjects/Countries/app/src/main/res/layout/content_main.xml" value="0.17552083333333332" />
         <entry key="..\:/Users/mali/AndroidStudioProjects/Countries/app/src/main/res/layout/fragment_country_list.xml" value="0.1" />
-        <entry key="..\:/Users/mali/AndroidStudioProjects/Countries/app/src/main/res/layout/fragment_home_container.xml" value="0.3365036231884058" />
+        <entry key="..\:/Users/mali/AndroidStudioProjects/Countries/app/src/main/res/layout/fragment_detail.xml" value="0.1" />
+        <entry key="..\:/Users/mali/AndroidStudioProjects/Countries/app/src/main/res/layout/fragment_first.xml" value="0.17552083333333332" />
+        <entry key="..\:/Users/mali/AndroidStudioProjects/Countries/app/src/main/res/layout/fragment_home_container.xml" value="0.1" />
         <entry key="..\:/Users/mali/AndroidStudioProjects/Countries/app/src/main/res/layout/fragment_saved_countries.xml" value="0.18802083333333333" />
         <entry key="..\:/Users/mali/AndroidStudioProjects/Countries/app/src/main/res/layout/item_country.xml" value="0.22" />
         <entry key="..\:/Users/mali/AndroidStudioProjects/Countries/app/src/main/res/layout/item_network_error.xml" value="0.16394927536231885" />
