@@ -34,6 +34,7 @@ class CountryAdapter : ListAdapter<Country, CountryAdapter.ViewHolder>(DiffUtilC
         getItem(position)?.let { holder.bind(it) }
     }
 
+
     inner class ViewHolder(private val binding: ItemCountryBinding) :
         RecyclerView.ViewHolder(binding.root) {
         init {

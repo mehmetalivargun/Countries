@@ -1,14 +1,19 @@
 package com.mehmetalivargun.countries.ui
 
-import android.util.Log
 import androidx.lifecycle.*
 import androidx.paging.PagingData
 import androidx.paging.cachedIn
 import com.mehmetalivargun.countries.data.Country
 import com.mehmetalivargun.countries.data.api.CountryDetail
 import com.mehmetalivargun.countries.data.db.CountryEntity
+import com.mehmetalivargun.countries.repository.NetworkResult
 import com.mehmetalivargun.countries.repository.SavedCountryRepository
+import com.mehmetalivargun.countries.ui.detail.DetailState
+import com.mehmetalivargun.countries.util.expand
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -16,19 +21,25 @@ import javax.inject.Inject
 class MainViewModel @Inject constructor(private val repository: SavedCountryRepository) : ViewModel() {
 
     val savedCountries: LiveData<List<CountryEntity>> = repository.savedCountries.asLiveData()
-    val saveState:MutableLiveData<Pair<String,Boolean>> = MutableLiveData()
 
+    private val _detail: MutableLiveData<CountryDetail?> = MutableLiveData()
+    val detail: LiveData<CountryDetail?> = _detail
+
+    val detailState: MutableLiveData<DetailState> = MutableLiveData()
+
+    private val _image: MutableLiveData<String> = MutableLiveData()
+    val image: LiveData<String> = _image
 
 
     fun getCountryListPaged(): LiveData<PagingData<Country>> {
         return repository.getCountry().cachedIn(viewModelScope)
     }
 
-    fun insertCountry(item: CountryEntity)= viewModelScope.launch {
+    fun insertCountry(item: CountryEntity) = viewModelScope.launch {
         repository.insertCountry(item)
     }
 
-    fun  isSaved(code:String) = viewModelScope.launch {
+    fun isSaved(code: String) = viewModelScope.launch {
         val test = repository.isExist(code)
     }
 
@@ -36,8 +47,28 @@ class MainViewModel @Inject constructor(private val repository: SavedCountryRepo
         repository.deleteCountry(item)
     }
 
-    private val _detail: MutableLiveData<CountryDetail> = MutableLiveData()
-    val detail : LiveData<CountryDetail> = _detail
+    fun getDetailOfCountry(code: String) = viewModelScope.launch {
+        repository.getCountryDetails(code).collect {
+            when (it) {
+                is NetworkResult.Success -> onSuccess(it.data!!)
+                else -> {
+                }
+            }
+        }
+    }
+
+    fun clearDetails() {
+        _detail.value = null
+    }
+
+    fun onSuccess(data: CountryDetail) {
+        _detail.value = data
+
+        GlobalScope.launch(Dispatchers.IO) {
+            _image.postValue(expand(data.flagImageUri)!!)
+        }
+
+    }
 
 
 }
