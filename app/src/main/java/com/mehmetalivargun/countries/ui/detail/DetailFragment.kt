@@ -3,6 +3,7 @@ package com.mehmetalivargun.countries.ui.detail
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
+import android.util.Log
 import android.view.*
 import android.view.animation.Animation
 import android.view.animation.BounceInterpolator
@@ -23,8 +24,7 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class DetailFragment : BaseFragment<FragmentDetailBinding>(FragmentDetailBinding::inflate) {
     val viewModel: MainViewModel by activityViewModels()
-    val args: DetailFragmentArgs by navArgs()
-
+    private val args: DetailFragmentArgs by navArgs()
     var country: CountryDetail? = null
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
@@ -54,13 +54,16 @@ class DetailFragment : BaseFragment<FragmentDetailBinding>(FragmentDetailBinding
             CompoundButton.OnCheckedChangeListener {
             override fun onCheckedChanged(p0: CompoundButton?, p1: Boolean) {
                 p0?.startAnimation(scaleAnimation)
-                if (args.isSaved && country != null) {
+                Log.e("Boolean", p1.toString())
+                if (!p1 && country != null) {
+
                     viewModel.removeCountry(
                         CountryEntity(
                             country!!.code,
                             country!!.name,
                             country!!.wikiDataId
                         )
+
                     )
                 } else {
                     viewModel.insertCountry(
