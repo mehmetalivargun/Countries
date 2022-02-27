@@ -14,6 +14,11 @@
         android:theme="@style/Theme.Countries">
 
         <activity
+            android:name=".ui.MainActivity2"
+            android:exported="false"
+            android:label="@string/title_activity_main2"
+            android:theme="@style/Theme.Countries.NoActionBar" />
+        <activity
             android:name=".ui.MainActivity"
             android:screenOrientation="portrait"
             android:exported="true">
