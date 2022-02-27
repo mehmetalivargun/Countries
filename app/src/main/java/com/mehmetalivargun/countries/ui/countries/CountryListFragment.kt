@@ -57,7 +57,11 @@ class CountryListFragment : BaseFragment<FragmentCountryListBinding>(FragmentCou
         }
         searchAdapter.onItemClickListener={
             viewModel.isSaved(it.code)
-            val direction = HomeContainerFragmentDirections.actionHomeContainerFragmentToDetailFragment(it.code)
+            val direction =
+                HomeContainerFragmentDirections.actionHomeContainerFragmentToDetailFragment(
+                    it.code,
+                    it.isSaved
+                )
             findNavController().navigate(direction)
         }
 

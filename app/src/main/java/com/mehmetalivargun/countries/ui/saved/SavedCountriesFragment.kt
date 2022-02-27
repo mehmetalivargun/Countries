@@ -24,7 +24,10 @@ class SavedCountriesFragment :  BaseFragment<FragmentSavedCountriesBinding>(Frag
         }
         adapter.onItemClickListener = { country ->
             val direction =
-                HomeContainerFragmentDirections.actionHomeContainerFragmentToDetailFragment(country.code)
+                HomeContainerFragmentDirections.actionHomeContainerFragmentToDetailFragment(
+                    country.code,
+                    true
+                )
             findNavController().navigate(direction)
         }
         viewModel.savedCountries.observe(viewLifecycleOwner) {

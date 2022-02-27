@@ -16,11 +16,14 @@
         android:id="@+id/detailFragment"
         android:name="com.mehmetalivargun.countries.ui.detail.DetailFragment"
         android:label="DetailFragment">
-            <argument
-                android:name="code"
-                android:defaultValue="-1"
-                app:argType="string"
-                />
+        <argument
+            android:name="code"
+            android:defaultValue="-1"
+            app:argType="string" />
+        <argument
+            android:name="isSaved"
+            android:defaultValue="false"
+            app:argType="boolean" />
 
         <action
 

@@ -8,7 +8,6 @@ import com.mehmetalivargun.countries.data.api.CountryDetail
 import com.mehmetalivargun.countries.data.db.CountryEntity
 import com.mehmetalivargun.countries.repository.NetworkResult
 import com.mehmetalivargun.countries.repository.SavedCountryRepository
-import com.mehmetalivargun.countries.ui.detail.DetailState
 import com.mehmetalivargun.countries.util.expand
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
@@ -25,10 +24,11 @@ class MainViewModel @Inject constructor(private val repository: SavedCountryRepo
     private val _detail: MutableLiveData<CountryDetail?> = MutableLiveData()
     val detail: LiveData<CountryDetail?> = _detail
 
-    val detailState: MutableLiveData<DetailState> = MutableLiveData()
 
     private val _image: MutableLiveData<String> = MutableLiveData()
     val image: LiveData<String> = _image
+
+    val isSaved: MutableLiveData<Boolean> = MutableLiveData()
 
 
     fun getCountryListPaged(): LiveData<PagingData<Country>> {
@@ -40,7 +40,7 @@ class MainViewModel @Inject constructor(private val repository: SavedCountryRepo
     }
 
     fun isSaved(code: String) = viewModelScope.launch {
-        val test = repository.isExist(code)
+        isSaved.postValue(repository.isExist(code))
     }
 
     fun removeCountry(item: CountryEntity) = viewModelScope.launch {
